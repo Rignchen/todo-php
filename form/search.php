@@ -3,5 +3,4 @@
         <strong>Search </strong>
         <input name="search" type="text">
     </label>
-    <input type="submit" value="Search">
 </form>

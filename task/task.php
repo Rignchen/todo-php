@@ -6,6 +6,5 @@
     <form action="index.php" method="post">
         <input type="hidden" name="modifyTask" value="<?= $index ?>">
         <input type="text" name="modifyTaskValue" value="<?= htmlspecialchars($task) ?>">
-        <input type="submit">
     </form>
 </li>
