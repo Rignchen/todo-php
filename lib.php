@@ -10,3 +10,10 @@ function reload(): void {
     writeJSON("data.json", $content);
     header("Location: index.php");
 }
+function swapIndex($array, $index1, $index2)
+{
+    $temp = $array[$index1];
+    $array[$index1] = $array[$index2];
+    $array[$index2] = $temp;
+    return $array;
+}

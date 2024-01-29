@@ -31,3 +31,13 @@ if (isset($_GET["search"])) {
         return stripos($task, $search) !== false;
     });
 }
+if (isset($_POST["moveTask"])) {
+    $index = $_POST["moveTask"];
+    if (isset($_POST["moveTaskUp"]) && $index > 0) {
+        $content = swapIndex($content, $index, $index - 1);
+    }
+    elseif (isset($_POST["moveTaskDown"]) && $index < count($content) - 1) {
+        $content = swapIndex($content, $index, $index + 1);
+    }
+    reload();
+}
