@@ -1,4 +1,8 @@
 <?php
+require_once "lib.php";
+$content = readJSON("data.json");
+require_once "get_data.php";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,5 +13,9 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- Add task form -->
+    <?php require "form/add.php"; ?>
+    <!-- Tasks list -->
+    <?php require "task/list.php"; ?>
 </body>
 </html>
