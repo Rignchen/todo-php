@@ -13,6 +13,8 @@ require_once "get_data.php";
     <title>Document</title>
 </head>
 <body>
+    <!-- Search bar -->
+    <?php require "form/search.php"; ?>
     <!-- Sort tasks -->
     <?php require "form/sort.php"; ?>
     <!-- Add task form -->

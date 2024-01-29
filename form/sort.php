@@ -3,8 +3,8 @@
         <strong>Sort tasks </strong>
         <select name="sort">
             <option value="">Unsorted</option>
-            <option value="alphabetically">Alphabetically</option>
-            <option value="analphabetically">Analphabetically</option>
+            <option value="alpha">Alphabetically</option>
+            <option value="reverse">Analphabetically</option>
         </select>
     </label>
     <input type="submit">

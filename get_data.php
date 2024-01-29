@@ -14,11 +14,20 @@ elseif (isset($_POST["modifyTask"], $_POST["modifyTaskValue"])) {
     reload();
 }
 elseif (isset($_GET["sort"])) {
-    if ($_GET["sort"] === "alphabetically") {
+    if ($_GET["sort"] === "alpha") {
         natcasesort($content);
     }
-    elseif ($_GET["sort"] === "analphabetically") {
+    elseif ($_GET["sort"] === "reverse") {
         natcasesort($content);
         $content = array_reverse($content);
     }
+}
+elseif (isset($_GET["search"])) {
+    $search = $_GET["search"];
+    $content = array_filter($content, function ($task) use ($search) {
+        if ($search === "") {
+            return true;
+        }
+        return stripos($task, $search) !== false;
+    });
 }
