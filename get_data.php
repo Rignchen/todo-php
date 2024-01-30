@@ -6,11 +6,8 @@ function getTaskData(): void {
     if (isset($_POST["index"])) {
         $index = $_POST["index"];
 
-        if (isset($_POST["modifyTaskValue"], $_POST["modifyTask"])) {
-            if (len($_POST["modifyTaskValue"]) < 3 || len($_POST["modifyTaskValue"]) > 100) {
-                sendError("Task is too short or too long, 3-100 characters per tasks are required!");
-            }
-            elseif ($content[$index] == $_POST["modifyTaskValue"] ) {
+        if (isset($_POST["modifyTaskValue"], $_POST["modifyTask"]) && validSize($_POST["modifyTaskValue"])) {
+            if ($content[$index] == $_POST["modifyTaskValue"] ) {
                 return;
             }
             else {
@@ -34,10 +31,7 @@ function getTaskData(): void {
 getTaskData();
 
 if (isset($_POST["addTask"])) {
-    if (len($_POST["modifyTaskValue"]) < 3) {
-        sendError("Task is too short, 3 characters minimum per tasks are required!");
-    }
-    else {
+    if (validSize($_POST["addTask"])) {
         $content[] = $_POST["addTask"];
     }
     reload();

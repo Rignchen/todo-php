@@ -29,7 +29,17 @@ function len($value): int {
     elseif (is_string($value)) return mb_strlen($value);
     else return 0;
 }
-function debug_to_console($data, $position) {
+function validSize($task, $min = 3, $max = 100): bool {
+    if (len($task) < $min || len($task) > $max) {
+        sendError(
+            ((len($task) < $min) ? "Size is too short" : "Size is too long") . ", " .
+            ((($min === $max) ? "size must be " . $min . " characters long" : "size must be between " . $min . " and " . $max . " characters long"))
+        );
+        return false;
+    }
+    return true;
+}
+function debug_to_console($data, $position): void {
     $output = $data;
     if (is_array($output))
         $output = implode(',', $output);
