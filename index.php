@@ -3,6 +3,7 @@ require_once "lib.php";
 $content = readJSON("data.json");
 require_once "get_data.php";
 
+debug_to_console($content,0);
 ?>
 <!doctype html>
 <html lang="en">

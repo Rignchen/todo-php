@@ -1,17 +1,15 @@
 <li style="display:flex;">
-    <!-- Remove task -->
     <form action="index.php" method="post">
-        <input type="hidden" name="removeTask" value="<?= $index ?>">
-        <button type="submit">X</button>
-    </form>
-    <!-- Task -->
-    <form action="index.php" method="post">
-        <input type="hidden" name="modifyTask" value="<?= $index ?>">
+        <input type="hidden" name="index" value="<?= $index ?>">
+        <button type="submit" name="modifyTask" hidden="hidden"></button> <!-- This hidden button is triggered when the user modifies a task -->
+
+        <!-- Remove task -->
+        <button type="submit" name="removeTask">X</button>
+
+        <!-- Task -->
         <input type="text" name="modifyTaskValue" value="<?= htmlspecialchars($task) ?>">
-    </form>
-    <!-- Move task position -->
-    <form action="index.php" method="post">
-        <input type="hidden" name="moveTask" value="<?= $index ?>">
+
+        <!-- Move task position -->
         <button type="submit" name="moveTaskUp">↑</button>
         <button type="submit" name="moveTaskDown">↓</button>
     </form>
