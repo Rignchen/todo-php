@@ -15,15 +15,17 @@ require_once "get_data.php";
     <title>Document</title>
 </head>
 <body>
-    <!-- Errors -->
-    <?php require "errors.php"; ?>
-    <!-- Search bar -->
-    <?php require "form/search.php"; ?>
-    <!-- Sort tasks -->
-    <?php require "form/sort.php"; ?>
-    <!-- Add task form -->
-    <?php require "form/add.php"; ?>
-    <!-- Tasks list -->
-    <?php require "task/list.php"; ?>
+    <?php
+    // Errors
+    require "errors.php";
+    // Search bar
+    require "form/search.php";
+    // Sort tasks
+    require "form/sort.php";
+    // Add task form
+    require "form/add.php";
+    // Tasks list
+    require "task/list.php";
+    ?>
 </body>
 </html>
