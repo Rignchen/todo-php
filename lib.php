@@ -19,6 +19,11 @@ function swapIndex($array, $index1, $index2) {
 function sendError($message) {
     $_SESSION["errors"][] = $message;
 }
+function len($value): int {
+    if (is_array($value)) return count($value);
+    elseif (is_string($value)) return strlen($value);
+    else return 0;
+}
 function debug_to_console($data, $position) {
     $output = $data;
     if (is_array($output))

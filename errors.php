@@ -1,5 +1,5 @@
 <?php
-    if (count($errors) > 0):
+    if (len($errors) > 0):
         foreach ($errors as $error): ?>
             <p style="color:red;background-color:#ffcccc;border-radius:5px;padding:5px">
                 <?= $error ?>
