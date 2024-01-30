@@ -7,7 +7,7 @@
         <button type="submit" name="removeTask">X</button>
 
         <!-- Task -->
-        <input type="text" name="modifyTaskValue" value="<?= htmlspecialchars($task) ?>">
+        <input type="text" style="width: 50vw;" name="modifyTaskValue" value="<?= htmlspecialchars($task) ?>">
 
         <!-- Move task position -->
         <button type="submit" name="moveTaskUp">↑</button>
