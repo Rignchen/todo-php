@@ -21,7 +21,7 @@ function sendError($message) {
 }
 function len($value): int {
     if (is_array($value)) return count($value);
-    elseif (is_string($value)) return strlen($value);
+    elseif (is_string($value)) return mb_strlen($value);
     else return 0;
 }
 function debug_to_console($data, $position) {
