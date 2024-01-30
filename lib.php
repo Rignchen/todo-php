@@ -1,18 +1,14 @@
 <?php
-function put_to_session($identifier, $value): void {
+function update_task_in_db($identifier, $value): void {
     $_SESSION[$identifier] = $value;
 }
-function add_to_session($identifier, $value): void {
-    if (!isset($_SESSION[$identifier])) $_SESSION[$identifier] = [];
-    $_SESSION[$identifier][] = $value;
-}
-function get_from_session($identifier): array {
+function get_task_from_db($identifier): array {
     if (!isset($_SESSION[$identifier])) return [];
     return $_SESSION[$identifier];
 }
 function reload(): void {
     global $content;
-    put_to_session("task", $content);
+    update_task_in_db("task", $content);
     header("Location: index.php");
 }
 function swapIndex($array, $index1, $index2) {
@@ -22,7 +18,8 @@ function swapIndex($array, $index1, $index2) {
     return $array;
 }
 function sendError($message): void {
-    add_to_session("errors", $message);
+    if (!isset($_SESSION["errors"])) $_SESSION["errors"] = [];
+    $_SESSION["errors"][] = $message;
 }
 function len($value): int {
     if (is_array($value)) return count($value);

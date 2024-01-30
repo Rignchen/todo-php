@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once "lib.php";
-$errors = get_from_session("errors");
-$content = get_from_session("task");
+$errors = get_task_from_db("errors");
+$content = get_task_from_db("task");
 require_once "get_data.php";
 
 ?>
