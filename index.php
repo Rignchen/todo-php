@@ -1,12 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION["errors"])) $_SESSION["errors"] = [];
-//if (!isset($_SESSION["task"])) $_SESSION["task"] = [];
-$errors = $_SESSION["errors"];
-//$content = $_SESSION["task"];
-
 require_once "lib.php";
-$content = readJSON("data.json");
+$errors = get_from_session("errors");
+$content = get_from_session("task");
 require_once "get_data.php";
 
 ?>

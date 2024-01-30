@@ -1,13 +1,18 @@
 <?php
-function readJSON($file) {
-    return json_decode(file_get_contents($file));
+function put_to_session($identifier, $value): void {
+    $_SESSION[$identifier] = $value;
 }
-function writeJSON($file, $contents): void {
-    file_put_contents($file, json_encode($contents));
+function add_to_session($identifier, $value): void {
+    if (!isset($_SESSION[$identifier])) $_SESSION[$identifier] = [];
+    $_SESSION[$identifier][] = $value;
+}
+function get_from_session($identifier): array {
+    if (!isset($_SESSION[$identifier])) return [];
+    return $_SESSION[$identifier];
 }
 function reload(): void {
     global $content;
-    writeJSON("data.json", $content);
+    put_to_session("task", $content);
     header("Location: index.php");
 }
 function swapIndex($array, $index1, $index2) {
@@ -16,8 +21,8 @@ function swapIndex($array, $index1, $index2) {
     $array[$index2] = $temp;
     return $array;
 }
-function sendError($message) {
-    $_SESSION["errors"][] = $message;
+function sendError($message): void {
+    add_to_session("errors", $message);
 }
 function len($value): int {
     if (is_array($value)) return count($value);
