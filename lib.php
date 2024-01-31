@@ -6,16 +6,23 @@ function connect_db(): PDO {
 }
 function get_task_from_db(): array {
     global $pdo;
-    $sql = $pdo->prepare(get_add_task_query());
-    $sql->execute();
-    return $sql->fetchAll(PDO::FETCH_ASSOC);
-}
-function get_add_task_query(): string {
+
+    $query = "SELECT * FROM task";
+
+    $is_query_search = (isset($_GET["search"]) and len($_GET["search"]) > 0);
+    if ($is_query_search) $query .= stripos($query, "where") === false ? " where title like ?" : " and title like ?";
+
     if (isset($_GET["sort"])) {
-        if ($_GET["sort"] === "alpha") return "SELECT * FROM task ORDER BY title collate nocase";
-        elseif ($_GET["sort"] === "reverse") return "SELECT * FROM task ORDER BY title collate nocase DESC";
+        if ($_GET["sort"] === "alpha") $query .= " ORDER BY title collate nocase";
+        elseif ($_GET["sort"] === "reverse") $query .= " ORDER BY title collate nocase DESC";
     }
-    return "SELECT * FROM task";
+
+    $sql = $pdo->prepare($query);
+
+    if ($is_query_search) $sql->execute(["%" . $_GET["search"] . "%"]);
+    else $sql->execute();
+
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 function add_task_to_db($task): void {
     global $pdo;
@@ -98,10 +105,16 @@ function validSize($task, $min = 3, $max = 100): bool {
 }
 
 // debug
-function debug_to_console($data, $position): void {
+function get_debug_messages($data, $position): string {
     $output = $data;
     if (is_array($output))
         $output = implode(',', $output);
 
-    echo "<script>console.log('Debug Objects, pos " . $position . ": " . htmlspecialchars($output) . "' );</script>";
+    return "Debug Objects, pos " . $position . ": " . htmlspecialchars($output);
+}
+function debug_to_console($data, $position): void {
+    echo "<script>console.log('" . get_debug_messages($data, $position) . "');</script>";
+}
+function debug_to_alert($data, $position): void {
+    echo "<script>alert('" . get_debug_messages($data, $position) . "');</script>";
 }
