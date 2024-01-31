@@ -18,8 +18,8 @@ function add_task_to_db($task): void {
 function update_tasks_in_db($contents): void {
     global $pdo;
     foreach ($contents as $data) {
-        $sql = $pdo->prepare("UPDATE `task` SET title = ? WHERE id = ?");
-        $sql->execute([$data["task"], $data["id"]]);
+        $sql = $pdo->prepare("UPDATE `task` SET title = :title WHERE id = :id");
+        $sql->execute($data);
     }
 }
 
@@ -45,11 +45,14 @@ function swapIndex($array, $index1, $index2) {
     $array[$index2] = $temp;
     return $array;
 }
-function get_index_title($array,$index): mixed {
-    return $array[$index];
+function get_title($value): string {
+    return $value["title"];
+}
+function get_index_title($array,$index): string {
+    return get_title(($array[$index]));
 }
 function set_index_title($array,$index,$value): array {
-    $array[$index] = $value;
+    $array[$index]["title"] = $value;
     return $array;
 }
 
