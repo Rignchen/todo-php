@@ -6,9 +6,16 @@ function connect_db(): PDO {
 }
 function get_task_from_db(): array {
     global $pdo;
-    $sql = $pdo->prepare("SELECT * FROM task");
+    $sql = $pdo->prepare(get_add_task_query());
     $sql->execute();
     return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+function get_add_task_query(): string {
+    if (isset($_GET["sort"])) {
+        if ($_GET["sort"] === "alpha") return "SELECT * FROM task ORDER BY title collate nocase";
+        elseif ($_GET["sort"] === "reverse") return "SELECT * FROM task ORDER BY title collate nocase DESC";
+    }
+    return "SELECT * FROM task";
 }
 function add_task_to_db($task): void {
     global $pdo;

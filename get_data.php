@@ -38,16 +38,6 @@ if (isset($_POST["addTask"])) {
     reload();
 }
 
-if (isset($_GET["sort"])) {
-    if ($_GET["sort"] === "alpha") {
-        natcasesort($content);
-    }
-    elseif ($_GET["sort"] === "reverse") {
-        natcasesort($content);
-        $content = array_reverse($content);
-    }
-}
-
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
     $content = array_filter($content, function ($task) use ($search) {
