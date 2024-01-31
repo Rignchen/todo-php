@@ -7,11 +7,11 @@ function getTaskData(): void {
         $index = $_POST["index"];
 
         if (isset($_POST["modifyTaskValue"], $_POST["modifyTask"]) && validSize($_POST["modifyTaskValue"])) {
-            if ($content[$index] == $_POST["modifyTaskValue"] ) {
+            if (get_index_title($content,$index) == $_POST["modifyTaskValue"] ) {
                 return;
             }
             else {
-                $content[$index] = $_POST["modifyTaskValue"];
+                $content = set_index_title($content,$index,$_POST["modifyTaskValue"]);
             }
         }
 

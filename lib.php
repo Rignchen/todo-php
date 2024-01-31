@@ -45,6 +45,13 @@ function swapIndex($array, $index1, $index2) {
     $array[$index2] = $temp;
     return $array;
 }
+function get_index_title($array,$index): mixed {
+    return $array[$index];
+}
+function set_index_title($array,$index,$value): array {
+    $array[$index] = $value;
+    return $array;
+}
 
 // size
 function len($value): int {
