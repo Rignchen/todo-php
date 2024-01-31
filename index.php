@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "lib.php";
 $pdo = connect_db();
 $errors = get_errors();
