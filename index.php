@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once "lib.php";
+$pdo = connect_db();
 $errors = get_errors();
 $content = get_task_from_db();
 require_once "get_data.php";

@@ -1,13 +1,29 @@
 <?php
 
-// data
-function update_task_in_db($value): void {
-    $_SESSION["task"] = $value;
+// database
+function connect_db(): PDO {
+    return new PDO('sqlite:data.db');
 }
 function get_task_from_db(): array {
-    if (!isset($_SESSION["task"])) return [];
-    return $_SESSION["task"];
+    global $pdo;
+    $sql = $pdo->prepare("SELECT * FROM task");
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
+function add_task_to_db($task): void {
+    global $pdo;
+    $sql = $pdo->prepare("INSERT INTO `task` (title) VALUES (?)");
+    $sql->execute([$task]);
+}
+function update_tasks_in_db($contents): void {
+    global $pdo;
+    foreach ($contents as $data) {
+        $sql = $pdo->prepare("UPDATE `task` SET title = ? WHERE id = ?");
+        $sql->execute([$data["task"], $data["id"]]);
+    }
+}
+
+// errors
 function get_errors(): array {
     if (!isset($_SESSION["errors"])) return [];
     return $_SESSION["errors"];
