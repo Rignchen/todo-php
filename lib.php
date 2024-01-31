@@ -35,8 +35,6 @@ function sendError($message): void {
 
 // web page
 function reload(): void {
-    global $content;
-    update_task_in_db($content);
     header("Location: index.php");
 }
 

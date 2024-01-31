@@ -25,6 +25,7 @@ function getTaskData(): void {
             $content = swapIndex($content, $index, $index + 1);
         }
 
+        update_tasks_in_db($content);
         reload();
     }
 }
@@ -32,7 +33,7 @@ getTaskData();
 
 if (isset($_POST["addTask"])) {
     if (validSize($_POST["addTask"])) {
-        $content[] = $_POST["addTask"];
+        add_task_to_db($_POST["addTask"]);
     }
     reload();
 }
