@@ -3,8 +3,8 @@ require_once "lib.php";
 
 function getTaskData(): void {
     global $content;
-    if (isset($_POST["index"])) {
-        $index = $_POST["index"];
+    if (isset($_POST["id"])) {
+        $index = get_index_from_id($_POST["id"]);
 
         if (isset($_POST["modifyTaskValue"], $_POST["modifyTask"]) && validSize($_POST["modifyTaskValue"])) {
             if (get_index_title($content,$index) == $_POST["modifyTaskValue"] ) {
@@ -16,7 +16,7 @@ function getTaskData(): void {
         }
 
         if (isset($_POST["removeTask"])) {
-            array_splice($content, $index, 1);
+            delete_task_from_db(get_id($content[$index]));
         }
 
         if (isset($_POST["moveTaskUp"]) && $index > 0) {
@@ -29,6 +29,7 @@ function getTaskData(): void {
         reload();
     }
 }
+
 getTaskData();
 
 if (isset($_POST["addTask"])) {

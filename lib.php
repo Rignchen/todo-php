@@ -29,6 +29,11 @@ function update_tasks_in_db($contents): void {
         $sql->execute($data);
     }
 }
+function delete_task_from_db($id): void {
+    global $pdo;
+    $sql = $pdo->prepare("DELETE FROM `task` WHERE id = ?");
+    $sql->execute([$id]);
+}
 
 // errors
 function get_errors(): array {
@@ -42,7 +47,7 @@ function sendError($message): void {
 
 // web page
 function reload(): void {
-    header("Location: index.php");
+    header("Location: " . $_SERVER["PHP_SELF"]);
 }
 
 // array
@@ -55,12 +60,24 @@ function swapIndex($array, $index1, $index2) {
 function get_title($value): string {
     return $value["title"];
 }
+function get_id($value): int {
+    return $value["id"];
+}
 function get_index_title($array,$index): string {
     return get_title(($array[$index]));
 }
 function set_index_title($array,$index,$value): array {
     $array[$index]["title"] = $value;
     return $array;
+}
+function get_index_from_id(mixed $id) {
+    global $content;
+    foreach ($content as $index => $data) {
+        if (get_id($data) == $id) {
+            return $index;
+        }
+    }
+    return -1;
 }
 
 // size

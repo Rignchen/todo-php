@@ -1,6 +1,6 @@
 <li style="display:flex;">
     <form action="index.php" method="post">
-        <input type="hidden" name="index" value="<?= $index ?>">
+        <input type="hidden" name="id" value="<?= get_id($task) ?>">
         <button type="submit" name="modifyTask" hidden="hidden"></button> <!-- This hidden button is triggered when the user modifies a task -->
 
         <!-- Remove task -->
