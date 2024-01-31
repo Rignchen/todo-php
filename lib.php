@@ -40,9 +40,9 @@ function reload(): void {
 
 // array
 function swapIndex($array, $index1, $index2) {
-    $temp = $array[$index1];
-    $array[$index1] = $array[$index2];
-    $array[$index2] = $temp;
+    $temp = get_index_title($array, $index1);
+    $array[$index1]["title"] = get_index_title($array, $index2);
+    $array[$index2]["title"] = $temp;
     return $array;
 }
 function get_title($value): string {
